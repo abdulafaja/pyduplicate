@@ -2,5 +2,5 @@ class PyDuplicateException(Exception):
     pass
 
 
-class PermissionDeniedException(PyDuplicateException):
+class FileSystemException(PyDuplicateException):
     pass

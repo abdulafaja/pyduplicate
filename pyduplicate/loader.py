@@ -1,4 +1,4 @@
-from pyduplicate.exceptions import PermissionDeniedException
+from pyduplicate.exceptions import FileSystemException
 from pyduplicate.filesystem import FileSystem
 
 
@@ -17,5 +17,5 @@ class Loader(object):
         try:
             for file in FileSystem.listdir(path):
                 self._append_file(file)
-        except PermissionDeniedException as e:
-            raise PermissionDeniedException(e)
+        except FileSystemException:
+            raise

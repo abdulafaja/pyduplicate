@@ -1,6 +1,6 @@
 import os
 
-from pyduplicate.exceptions import PermissionDeniedException
+from pyduplicate.exceptions import FileSystemException
 from pyduplicate.logger import PyDuplicateLogger
 
 
@@ -11,4 +11,7 @@ class FileSystem(object):
             return os.listdir(path)
         except PermissionError as e:
             PyDuplicateLogger.exception(e)
-            raise PermissionDeniedException(e)
+            raise FileSystemException(e)
+        except NotADirectoryError as e:
+            PyDuplicateLogger.exception(e)
+            raise FileSystemException(e)
