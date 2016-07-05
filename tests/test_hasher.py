@@ -1,7 +1,5 @@
-import os
 import unittest
 
-from pyduplicate.exceptions import FileSystemException
 from pyduplicate.hasher import Hasher
 
 
