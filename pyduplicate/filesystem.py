@@ -26,3 +26,6 @@ class FileSystem(object):
         except NotADirectoryError as e:
             PyDuplicateLogger.exception(e)
             raise FileSystemException(e)
+        except FileNotFoundError as e:
+            PyDuplicateLogger.exception(e)
+            raise FileSystemException(e)
