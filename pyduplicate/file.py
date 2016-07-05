@@ -15,3 +15,17 @@ class File(object):
 
     def __hash__(self):
         return self._hash
+
+    def __eq__(self, other):
+        return self.__hash__() == other.__hash__()
+
+    def __unicode__(self):
+        return '{}'.format(self.filename)
+
+    @property
+    def filename(self):
+        return self._filename
+
+    @staticmethod
+    def compare(object, other):
+        return object._modification_date < other._modification_date
