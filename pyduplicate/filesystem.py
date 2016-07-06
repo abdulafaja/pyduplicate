@@ -1,7 +1,8 @@
 import datetime
 import os
+import shutil
 
-from pyduplicate.exceptions import FileSystemException
+from pyduplicate.exceptions import ArgumentException, FileSystemException
 from pyduplicate.logger import PyDuplicateLogger
 
 
@@ -27,18 +28,18 @@ class FileSystem(object):
             raise FileSystemException(e)
         except NotADirectoryError as e:
             PyDuplicateLogger.exception(e)
-            raise FileSystemException(e)
+            raise ArgumentException(e)
         except FileNotFoundError as e:
             PyDuplicateLogger.exception(e)
-            raise FileSystemException(e)
+            raise ArgumentException(e)
 
     @classmethod
     def filename(cls, filepath):
         """
         Get the file name from given absolute path
 
-        :param path: Path to the file
-        :type path: str
+        :param filepath: Path to the file
+        :type filepath: str
         :return: Filename under given path
         :rtype: str
         """
@@ -59,3 +60,18 @@ class FileSystem(object):
         except OSError as e:
             PyDuplicateLogger.exception(e)
             raise FileSystemException(e)
+
+    @classmethod
+    def file_copy(cls, filepath, dest_path):
+        """
+        Copy files to given destination path
+        :param filepath: Path to the file which should be copied
+        :type filepath: str
+        :param dest_path: Destination path where file should be copied. It must be directory
+        :type dest_path: str
+        :return: None
+        :rtype: None
+        """
+        if not os.path.isdir(dest_path):
+            raise ArgumentException("Path has to be directory")
+        shutil.copy2(filepath, dest_path)

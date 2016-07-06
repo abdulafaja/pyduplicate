@@ -21,14 +21,14 @@ class DuplicateAnalyzer(object):
             if object not in unique:
                 unique.append(object)
             else:
-                second = unique[unique.index(object)]
-                unique.remove(second)
-                if compare_func(object, second):
-                    unique.append(second)
+                other = unique[unique.index(object)]
+                unique.remove(other)
+                if compare_func(object, other):
+                    unique.append(other)
                     duplicate.append(object)
                 else:
                     unique.append(object)
-                    duplicate.append(second)
+                    duplicate.append(other)
         return unique, duplicate
 
     @classmethod
