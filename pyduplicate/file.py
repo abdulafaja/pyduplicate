@@ -7,6 +7,8 @@ class File(object):
     Class which represent file.
     It has file last modification time, path to it and hashed content
     """
+    __slots__ = ['_path', '_filename', '_modification_date', '_hash']
+
     def __init__(self, file_path):
         self._path = file_path
         self._filename = FileSystem.filename(self._path)
@@ -25,6 +27,14 @@ class File(object):
     @property
     def filename(self):
         return self._filename
+
+    @property
+    def formatted_modification_date(self):
+        return self._modification_date.strftime("%Y/%d")
+
+    @property
+    def filepath(self):
+        return self._path
 
     @staticmethod
     def compare(object, other):

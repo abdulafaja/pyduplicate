@@ -9,6 +9,8 @@ class Loader(object):
     """
     Loader class which is responsible for load files from given path
     """
+    __slots__ = ['_files']
+
     def __init__(self):
         self._files = []
 
@@ -31,7 +33,7 @@ class Loader(object):
     def _load_files_list_comprehension(self, path):
         [self._create_file_instance(file_abs_path) for file_abs_path in FileSystem.listdir(path)]
 
-    def load_files(self, path, multiprocess=True):
+    def load_files(self, path, multiprocess=False):
         """
         Function loads files from given path and create an instance of each of it
 

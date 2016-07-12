@@ -75,3 +75,21 @@ class FileSystem(object):
         if not os.path.isdir(dest_path):
             raise ArgumentException("Path has to be directory")
         shutil.copy2(filepath, dest_path)
+
+    @classmethod
+    def create_dir(cls, path, dir_name, ignore_errors=False):
+        """
+        Create a directory on given path with dir_name
+        :param path: Path where directory is going to be created
+        :type path: str
+        :param dir_name: Directory name
+        :type dir_name: str
+        :return: None
+        :rtype: None
+        """
+        try:
+            os.makedirs(os.path.join(path, dir_name))
+        except FileExistsError as e:
+            PyDuplicateLogger.exception(e)
+            if not ignore_errors:
+                raise FileSystemException(e)
